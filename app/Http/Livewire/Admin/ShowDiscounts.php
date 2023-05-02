@@ -24,7 +24,7 @@ class ShowDiscounts extends Component
 
     public function render()
     {
-        $employeeDiscounts = EmployeesVacation::whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where([['employee_id', $this->employeeId], ['discount', '!=', Null]])->get();
+        $employeeDiscounts = EmployeesVacation::whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where([['employee_id', $this->employeeId], ['discount', '!=', Null]])->paginate(5);
 
         return view('livewire.admin.show-discounts',[
             'employeeDiscounts' => $employeeDiscounts, 

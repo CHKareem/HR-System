@@ -91,16 +91,20 @@
                     <a class="nav-link" id="ex-with-icons-tab-8" data-toggle="tab" href="#ex-with-icons-tabs-8" role="tab"
                     aria-controls="ex-with-icons-tabs-8" aria-selected="false"><i class="fas fa-money-check-alt mr-2 fa-fw me-2"></i>Discounts</a>
                 </li>
+                <li class="nav-item" role="presentation" wire:ignore>
+                    <a class="nav-link" id="ex-with-icons-tab-9" data-toggle="tab" href="#ex-with-icons-tabs-9" role="tab"
+                    aria-controls="ex-with-icons-tabs-9" aria-selected="false"><i class="fas fa-money-check-alt mr-2 fa-fw me-2"></i>Custom Exportables</a>
+                </li>
                 </ul>
                 <!-- Tabs navs -->
 
                                 <!-- Tabs content -->
             <div class="tab-content" id="ex-with-icons-content">
-                 <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1" wire:ignore.self>a</div>
+                 <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1" wire:ignore.self><livewire:admin.show-vacations /></div>
 
                  <div class="tab-pane fade show" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2" wire:ignore.self><livewire:admin.show-positions /></div>
 
-                 <div class="tab-pane fade show" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3" wire:ignore.self>c</div>
+                 <div class="tab-pane fade show" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3" wire:ignore.self><livewire:admin.show-attendances /></div>
 
                  <div class="tab-pane fade show" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4" wire:ignore.self>d</div>
 
@@ -111,6 +115,8 @@
                  <div class="tab-pane fade show" id="ex-with-icons-tabs-7" role="tabpanel" aria-labelledby="ex-with-icons-tab-7" wire:ignore.self>g</div>
 
                  <div class="tab-pane fade show" id="ex-with-icons-tabs-8" role="tabpanel" aria-labelledby="ex-with-icons-tab-8" wire:ignore.self><livewire:admin.show-discounts /></div>
+
+                 <div class="tab-pane fade show" id="ex-with-icons-tabs-9" role="tabpanel" aria-labelledby="ex-with-icons-tab-9" wire:ignore.self><livewire:admin.show-exportables /></div>
 </div>
 
             </div>

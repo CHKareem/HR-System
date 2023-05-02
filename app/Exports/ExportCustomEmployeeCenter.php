@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\Employee;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Models\EmployeesPosition;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\withStrictNullComparison;
 use Maatwebsite\Excel\Concerns\shouldAutoSize;
@@ -18,70 +18,52 @@ use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use Maatwebsite\Excel\Concerns\ToModel;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
+use Maatwebsite\Excel\Concerns\Exportable;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\withMapping;
 
-
-class ExportEmployee extends DefaultValueBinder implements FromCollection,WithHeadings, withStrictNullComparison, shouldAutoSize, WithStyles, WithEvents, WithCustomValueBinder, withMapping
+class ExportCustomEmployeeCenter extends DefaultValueBinder implements FromQuery,WithHeadings, withStrictNullComparison, shouldAutoSize, WithStyles, WithEvents, WithCustomValueBinder, withMapping
 {
-    public function collection()
+    use Exportable;
+
+
+    public function __construct($employees){
+        $this->employees = $employees;
+    }
+
+    public function query()
     {
-        return Employee::all();
+        if($this->employees[0] != null && $this->employees[1] != null && $this->employees[2] != null && $this->employees[3] != null){
+        return EmployeesPosition::with('employees:id,fullName')->with('centers:id,centerName')->whereIn('employee_id' ,$this->employees[0])->whereIn('center_id' ,$this->employees[3])->whereBetween('startDate',[$this->employees[1], $this->employees[2]]);
+        }if($this->employees[3] != null && $this->employees[0] != null){
+            return EmployeesPosition::with('employees:id,fullName')->with('centers:id,centerName')->whereIn('employee_id' ,$this->employees[0])->whereIn('center_id' ,$this->employees[3]);
+         }if($this->employees[0] == null && $this->employees[3] != null){
+            return EmployeesPosition::with('employees:id,fullName')->with('centers:id,centerName')->whereIn('center_id' ,$this->employees[3]);
+        }if($this->employees[0] == null && $this->employees[1] != null && $this->employees[2] != null && $this->employees[3] != null){
+
+            return EmployeesPosition::with('centers:id,centerName')->whereIn('center_id' ,$this->employees[3])->whereBetween('startDate',[$this->employees[1], $this->employees[2]]);
+        }
     }
 
     public function headings(): array
     {
         return [
-            ' ID ',
             ' Full Name ',
-            ' First Name ',
-            ' Last Name ',
-            ' Father Name ',
-            ' Mother Name ',
-            ' Birth And Place ',
-            ' National Number ',
-            ' Degree ',
-            ' Gender ',
-            ' Mobile ',
+            ' Center Name ',
             ' Start Date ',
-            ' Address ',
-            ' Quit Date ',
-            ' Note ',
-            ' Vacation Count ',
-            ' Hourly Late ',
-            ' Hourly Vacacation',
-            ' No Payment Count ',
-            ' Health Count ',
-            ' Working Years ',
-            ' Active ',
+            ' End Date ',
         ];
     }
 
-    public function map($emp):array {
+    public function map($empCen):array {
         return [
-            $emp->id,
-            $emp->fullName,
-            $emp->firstName,
-            $emp->lastName,
-            $emp->fatherName,
-            $emp->motherName,
-            $emp->birthAndPlace,
-            $emp->nationalNumber,
-            $emp->degree,
-            $emp->gender_name,
-            $emp->mobile,
-            $emp->startDate,
-            $emp->address,
-            $emp->quitDate,
-            $emp->notes,
-            $emp->vacationCount,
-            $emp->hourlyLate,
-            $emp->hourlyVac,
-            $emp->noPaymentCount,
-            $emp->healthCount,
-            $emp->workingYears,
-            $emp->is_active_name,
+        $empCen->employees->fullName,
+        $empCen->centers->centerName,
+        $empCen->startDate,
+        $empCen->endDate,
         ];
+
     }
 
     public function styles(Worksheet $sheet)
@@ -96,7 +78,7 @@ class ExportEmployee extends DefaultValueBinder implements FromCollection,WithHe
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $cellRange = 'A1:V1'; // All headers
+                $cellRange = 'A1:D1'; // All headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14)->getColor()->setRGB('ffffff');
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFill()
                 ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)

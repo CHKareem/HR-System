@@ -231,10 +231,18 @@ margin-bottom: 2em;
 
 /* SELECT STYLE */
 
-#employeeId + .select2-container--default .select2-selection--multiple{
+.select2 {
+width:100%!important;
+}
+
+#employeeId + .select2-container--default .select2-selection--multiple,
+#centerId + .select2-container--default .select2-selection--multiple,
+#positionId + .select2-container--default .select2-selection--multiple,
+#departmentId + .select2-container--default .select2-selection--multiple{
     height: 80px;
     overflow-y: scroll;
     overflow-x: hidden;
+    width: 100% !important;
 }
 
 /* Clear "X" */
@@ -722,6 +730,7 @@ $(document).ready(function(){
 
 @stack('js')
 @stack('js2')
+@stack('js3')
 @livewireScripts
 <!-- REQUIRED SCRIPTS -->
 

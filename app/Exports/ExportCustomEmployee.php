@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Employee;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\withStrictNullComparison;
 use Maatwebsite\Excel\Concerns\shouldAutoSize;
@@ -18,15 +18,31 @@ use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use Maatwebsite\Excel\Concerns\ToModel;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
+use Maatwebsite\Excel\Concerns\Exportable;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\withMapping;
 
 
-class ExportEmployee extends DefaultValueBinder implements FromCollection,WithHeadings, withStrictNullComparison, shouldAutoSize, WithStyles, WithEvents, WithCustomValueBinder, withMapping
+class ExportCustomEmployee extends DefaultValueBinder implements FromQuery,WithHeadings, withStrictNullComparison, shouldAutoSize, WithStyles, WithEvents, WithCustomValueBinder, withMapping
 {
-    public function collection()
+
+    use Exportable;
+
+
+    public function __construct($employees){
+        $this->employees = $employees;
+    }
+
+    public function query()
     {
-        return Employee::all();
+        if($this->employees[0] != null && $this->employees[1] != null && $this->employees[2] != null){
+        return Employee::whereIn('id' ,$this->employees[0])->whereBetween('startDate',[$this->employees[1], $this->employees[2]]);
+        }elseif($this->employees[1] == null && $this->employees[2] == null){
+            return Employee::whereIn('id' ,$this->employees[0]);
+        }elseif($this->employees[0] == null){
+            return Employee::whereBetween('startDate',[$this->employees[1], $this->employees[2]]);
+        }
     }
 
     public function headings(): array
@@ -46,7 +62,7 @@ class ExportEmployee extends DefaultValueBinder implements FromCollection,WithHe
             ' Start Date ',
             ' Address ',
             ' Quit Date ',
-            ' Note ',
+            ' Notes ',
             ' Vacation Count ',
             ' Hourly Late ',
             ' Hourly Vacacation',
@@ -83,7 +99,6 @@ class ExportEmployee extends DefaultValueBinder implements FromCollection,WithHe
             $emp->is_active_name,
         ];
     }
-
     public function styles(Worksheet $sheet)
     {
         return [
@@ -130,4 +145,5 @@ class ExportEmployee extends DefaultValueBinder implements FromCollection,WithHe
         // else return default behavior
         return parent::bindValue($cell, $value);
     }
+
 }

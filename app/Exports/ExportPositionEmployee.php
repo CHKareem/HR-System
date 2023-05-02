@@ -19,25 +19,42 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
+use Maatwebsite\Excel\Concerns\withMapping;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
 
 
-class ExportPositionEmployee extends DefaultValueBinder implements FromCollection,WithHeadings, withStrictNullComparison, shouldAutoSize, WithStyles, WithEvents, WithCustomValueBinder
+class ExportPositionEmployee extends DefaultValueBinder implements FromCollection,WithHeadings, withStrictNullComparison, shouldAutoSize, WithStyles, WithEvents, WithCustomValueBinder,withMapping
 {
-    public function collection()
+    use Exportable;
+    public function query()
     {
-        return EmployeesPosition::all();
+        return EmployeesPosition::with('employees:id,fullName')->with('positions:id,positionName')->
+        with('departments:id,departmentName')->with('centers:id,centerName');
     }
 
     public function headings(): array
     {
         return [
-            ' Employee ID ',
-            ' Position ID ',
-            ' Department ID ',
-            ' Center ID ',
+            ' Employee Name ',
+            ' Position Name ',
+            ' Department Name ',
+            ' Center Name ',
             ' Start Date ',
             ' End Date ',
         ];
+    }
+
+    public function map($empPos):array {
+        return [
+        $empPos->employees->fullName,
+        $empPos->positions->positionName,
+        $empPos->departments->departmentName,
+        $empPos->centers->centerName,
+        $empPos->startDate,
+        $empPos->endDate,
+        ];
+
     }
 
     public function styles(Worksheet $sheet)

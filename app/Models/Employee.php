@@ -64,4 +64,24 @@ class Employee extends Model
     //     return $this->belongsTo(Department::class, 'department_id'); 
         
     // }
+
+    public function getGenderNameAttribute($value)
+    {
+        switch ($this->attributes['gender']) {
+            case 1: // here is number not string.
+                return 'Male';
+            case 0:
+                return 'Female';
+        }
+    }
+
+    public function getIsActiveNameAttribute($value)
+    {
+        switch ($this->attributes['isActive']) {
+            case 1: // here is number not string.
+                return 'Active';
+            case 0:
+                return 'Not Active';
+        }
+    }
 }

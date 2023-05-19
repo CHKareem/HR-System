@@ -679,6 +679,24 @@ width:100%!important;
     html: true,
   });
 
+  $(".userIcon").tooltip({
+    placement: "bottom",
+    title: "@lang('auth.userName')",
+    html: true,
+  });
+
+  $(".logoutIcon").tooltip({
+    placement: "bottom",
+    title: "@lang('auth.logOut')",
+    html: true,
+  });
+
+  $(".langIcon").tooltip({
+    placement: "bottom",
+    title: "@lang('auth.language')",
+    html: true,
+  });
+  
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -711,6 +729,24 @@ Livewire.hook('element.updated', (el, component) => {
   $(".RelinkIcon").tooltip({
     placement: "bottom",
     title: 'Relink',
+    html: true,
+  });
+
+  $(".userIcon").tooltip({
+    placement: "bottom",
+    title: "@lang('auth.userName')",
+    html: true,
+  });
+
+  $(".logoutIcon").tooltip({
+    placement: "bottom",
+    title: "@lang('auth.logOut')",
+    html: true,
+  });
+
+  $(".langIcon").tooltip({
+    placement: "bottom",
+    title: "@lang('auth.language')",
     html: true,
   });
 

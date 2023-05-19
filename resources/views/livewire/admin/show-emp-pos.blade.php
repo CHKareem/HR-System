@@ -8,15 +8,15 @@
                 <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
                 <li class="nav-item" role="presentation" wire:ignore>
                     <a class="nav-link active" id="ex-with-icons-tab-1" data-toggle="tab" href="#ex-with-icons-tabs-1" role="tab"
-                    aria-controls="ex-with-icons-tabs-1" aria-selected="true"><i class="fa fa-plus-circle mr-2 fa-fw me-2"></i>Add</a>
+                    aria-controls="ex-with-icons-tabs-1" aria-selected="true"><i class="fa fa-plus-circle mr-2 fa-fw me-2"></i>@lang('auth.add')</a>
                 </li>
                 <li class="nav-item" role="presentation" wire:ignore>
                     <a class="nav-link" id="ex-with-icons-tab-2" data-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
-                    aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class=" fa fa-edit mr-2 fa-fw me-2"></i>Edit</a>
+                    aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class=" fa fa-edit mr-2 fa-fw me-2"></i>@lang('auth.edit')</a>
                 </li>
                 <li class="nav-item" role="presentation" wire:ignore>
                     <a class="nav-link" id="ex-with-icons-tab-3" data-toggle="tab" href="#ex-with-icons-tabs-3" role="tab"
-                    aria-controls="ex-with-icons-tabs-3" aria-selected="false"><i class="fa-solid fa-table mr-2 fa-fw me-2"></i>Import & Export</a>
+                    aria-controls="ex-with-icons-tabs-3" aria-selected="false"><i class="fa-solid fa-table mr-2 fa-fw me-2"></i>@lang('auth.impExp')</a>
                 </li>
                 </ul>
                 <!-- Tabs navs -->
@@ -26,9 +26,9 @@
                  <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1" wire:ignore.self>
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="employeeId">Employee Name</label>
+                        <label for="employeeId">@lang('auth.employeeName')</label>
                         <div class="search-box">
-                          <input wire:model="searchEmployee" wire:keyup="searchResult" type="text" class="form-control" id="employeeId" placeholder="Enter Employee Name">
+                          <input wire:model="searchEmployee" wire:keyup="searchResult" type="text" class="form-control" id="employeeId" placeholder="@lang('auth.enterEmpName')">
                         
                             <!-- Search result list -->
                             @if($showdivEmployee)
@@ -55,9 +55,9 @@
                       </div>
 
                     <div class="form-group col-md-6">
-                        <label for="fullName">Position Name</label>
+                        <label for="fullName">@lang('auth.positionName')</label>
                         <div class="search-box">
-                        <input wire:model="searchPosition" wire:keyup="searchResultPosition" type="text" class="form-control" id="fullName" placeholder="Enter Position Name">
+                        <input wire:model="searchPosition" wire:keyup="searchResultPosition" type="text" class="form-control" id="fullName" placeholder="@lang('auth.enterPosMsg')">
                                                     <!-- Search result list -->
                                                     @if($showdivPosition)
                                 <ul>
@@ -82,9 +82,9 @@
                           </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="fullName">Department Name</label>
+                        <label for="fullName">@lang('auth.departmentName')</label>
                         <div class="search-box">
-                        <input wire:model="searchDepartment" wire:keyup="searchResultDepartment" type="text" class="form-control" id="fullName" placeholder="Enter Department Name">
+                        <input wire:model="searchDepartment" wire:keyup="searchResultDepartment" type="text" class="form-control" id="fullName" placeholder="@lang('auth.enterDepMsg')">
                                                     <!-- Search result list -->
                                                     @if($showdivDepartment)
                                 <ul>
@@ -109,9 +109,9 @@
                           </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="fullName">Center Name</label>
+                        <label for="fullName">@lang('auth.centerName')</label>
                         <div class="search-box">
-                        <input wire:model="searchCenter" wire:keyup="searchResultCenter" type="text" class="form-control" id="fullName" placeholder="Enter Center Name">
+                        <input wire:model="searchCenter" wire:keyup="searchResultCenter" type="text" class="form-control" id="fullName" placeholder="@lang('auth.enterCenMsg')">
                                                     <!-- Search result list -->
                                                     @if($showdivCenter)
                                 <ul>
@@ -136,17 +136,17 @@
                           </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="startDate">Start Date</label>
+                        <label for="startDate">@lang('auth.startDate')</label>
                         <input wire:model="startDate" type="date" class="form-control" id="startDate">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="endDate">End Date</label>
+                        <label for="endDate">@lang('auth.endDate')</label>
                         <input wire:model="endDate" type="date" class="form-control" id="endDate">
                     </div>
                 </div>
                 <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" wire:click="new_employee_position"><i class="fa fa-save mr-1"></i>
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                 </button>
             </div>
                 </div>
@@ -154,9 +154,9 @@
                   <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2" wire:ignore.self>
                   <div class="form-row">
                   <div class="form-group col-lg-12">
-                        <label for="employeeId1">Employee Name</label>
+                        <label for="employeeId1">@lang('auth.employeeName')</label>
                         <div class="search-box">
-                          <input wire:model="searchEdit" wire:keyup="searchResultEdit" type="text" class="form-control" id="employeeId1" placeholder="Enter Employee Name">
+                          <input wire:model="searchEdit" wire:keyup="searchResultEdit" type="text" class="form-control" id="employeeId1" placeholder="@lang('auth.enterEmpName')">
                         
                             <!-- Search result list -->
                             @if($showdivEdit)
@@ -189,7 +189,7 @@
                             @foreach($getEmployeePositions as $index => $getEmployeePosition)
                             <input type="text" class="form-control" wire:model="getEmployeePositions.{{ $index }}.id" hidden>
                             <div class="form-group col-lg-12">
-                        <label >Position Name: </label>
+                        <label >@lang('auth.positionName')</label>
                         <select wire:model="getEmployeePositions.{{ $index }}.position_id" class="custom-select rounded-0">
                             @foreach ($positions as $position)
                                 <option value="{{ $position->id }}">{{ $position->positionName }}</option>
@@ -197,7 +197,7 @@
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
-                        <label >Department Name: </label>
+                        <label >@lang('auth.departmentName')</label>
                         <select wire:model="getEmployeePositions.{{ $index }}.department_id" class="custom-select rounded-0">
                             @foreach ($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->departmentName }}</option>
@@ -205,7 +205,7 @@
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
-                        <label >Center Name: </label>
+                        <label >@lang('auth.centerName')</label>
                         <select wire:model="getEmployeePositions.{{ $index }}.center_id" class="custom-select rounded-0">
                             @foreach ($centers as $center)
                                 <option value="{{ $center->id }}">{{ $center->centerName }}</option>
@@ -213,11 +213,11 @@
                         </select>
                     </div>
                             <div class="form-group col-lg-6">
-                                <label>Start Date</label>
+                                <label>@lang('auth.startDate')</label>
                                 <input type="date" class="form-control" wire:model="getEmployeePositions.{{ $index }}.startDate">
                                 </div>
                                 <div class="form-group col-lg-6">
-                                <label for="editEndDate">End Date</label>
+                                <label for="editEndDate">@lang('auth.endDate')</label>
                                 <input type="date" class="form-control" wire:model="getEmployeePositions.{{ $index }}.endDate">
                             </div>
                             <br><hr style="width:95%;height:1px;background: rgba(0,0,0,.2);" class="hr-style"><br>
@@ -225,7 +225,7 @@
                             
                             <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" wire:click="edit_employee_position"><i class="fa fa-save mr-1"></i>
-                                <span>Save</span>
+                                <span>@lang('auth.save')</span>
                         </button>
                     </div>
                             
@@ -246,8 +246,8 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="file1" class="drop-container">
-  <span class="drop-title">Drop files here</span>
-  or
+  <span class="drop-title">@lang('auth.drop')</span>
+  @lang('auth.or')
   <input type="file" id="file1" name="file1" required>
 </label>
 
@@ -257,7 +257,7 @@
             </div>
             <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
-                        <span>Import File</span>
+                        <span>@lang('auth.importFile')</span>
                 </button>
             </form>
             
@@ -267,7 +267,7 @@
                                 enctype="multipart/form-data">
                                 @csrf
                             <button class="btn btn-primary">
-                                    <i class="fa-solid fa-table mr-2"></i> Export Employees Positions
+                                    <i class="fa-solid fa-table mr-2"></i> @lang('auth.expEmpPos')
                                 </button>
                    </div>
                             </form>

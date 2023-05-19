@@ -32,22 +32,32 @@ use App\Http\Livewire\Admin\ShowDiscounts;
 |
 */
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', AdminController::class)->name('dashboard');
+Route::get('/', function() {
+    return redirect(app()->getLocale());
+});
+
+
+
+Route::group(['prefix' => '{locale}',
+              'where' => (['locale' => '[a-zA-Z]{2}']),
+              'middleware' => ['auth','setLocale']], function () {
+
+
+    Route::get('/', function () {
+
+        return view('dashboard');
+        });
+
+
 
     Route::get('dashboard', DashboardList::class)->name('dashboard');
 
     Route::get('attendees', AttendeesList::class)->name('attendees');
-    Route::post('/import_attendees',[AttendanceController::class,'import_attendees'])->name('import_attendees');
-    Route::get('/export_attendees',[AttendanceController::class,'export_attendees'])->name('export_attendees');
 
     Route::get('discount', DiscountList::class)->name('discount');
     Route::get('reports', ReportList::class)->name('reports');
 
     Route::get('employees', EmployeesList::class)->name('employees');
-    Route::post('/import_employees',[EmployeeController::class,'import_employees'])->name('import_employees');
-    Route::get('/export_employees',[EmployeeController::class,'export_employees'])->name('export_employees');
-
 
     Route::get('centers', CentersList::class)->name('centers');
     Route::get('departments', DepartmentsList::class)->name('departments');
@@ -57,18 +67,28 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('tasks', TasksList::class)->name('tasks');
 
     Route::get('holidays', HolidaysList::class)->name('holidays');
-    Route::post('/import3',[vacationController::class,
-    'import3'])->name('import3');
 
-    Route::post('/import_positions_employees',[PositionEmployeeController::class,
-    'import_positions_employees'])->name('import_positions_employees');
-    Route::get('/export_positions_employees',[PositionEmployeeController::class,'export_positions_employees'])->name('export_positions_employees');
 
 Route::get('/exportPDF',[ShowDiscounts::class,
 'exportPDF'])->name('exportPDF');
 Route::get('/previewPDF',[ShowDiscounts::class,
 'previewPDF'])->name('previewPDF');
+
 });
+// });
+Route::post('/import3',[vacationController::class,
+'import3'])->name('import3');
+
+Route::post('/import_positions_employees',[PositionEmployeeController::class,
+'import_positions_employees'])->name('import_positions_employees');
+Route::get('/export_positions_employees',[PositionEmployeeController::class,'export_positions_employees'])->name('export_positions_employees');
+
+Route::post('/import_employees',[EmployeeController::class,'import_employees'])->name('import_employees');
+Route::get('/export_employees',[EmployeeController::class,'export_employees'])->name('export_employees');
+
+Route::post('/import_attendees',[AttendanceController::class,'import_attendees'])->name('import_attendees');
+Route::get('/export_attendees',[AttendanceController::class,'export_attendees'])->name('export_attendees');
+
 
 require __DIR__.'/auth.php';
 

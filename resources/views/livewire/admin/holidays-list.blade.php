@@ -4,12 +4,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Holidays</h1>
+            <h1 class="m-0">@lang('auth.holTitle')</h1>
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active">Holidays</li>
+                <li class="breadcrumb-item"><a href="dashboard">@lang('auth.dashTitle')</a></li>
+                <li class="breadcrumb-item active">@lang('auth.holTitle')</li>
             </ol>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 <div class="small-box bg-success">
                 <div class="inner">
                     <h3> {{ $officialHolidayCount }} </h3>
-                    <p>All Holidays</p>
+                    <p>@lang('auth.allHol')</p>
                </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -42,7 +42,7 @@
                        @foreach($centers as $center)@endforeach
                        {{ $center->weekends->count('pivot.weekend_id') }}
                      </h3>
-                    <p>All Weekends</p>
+                    <p>@lang('auth.allWeek')</p>
                       </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -66,7 +66,7 @@
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
 
-                    <span>Add Weekends</span>
+                    <span>@lang('auth.addWeek')</span>
               </h5>
             </div>
             <div class="modal-body">
@@ -88,7 +88,7 @@
                     <div wire:ignore class="form-group">
                     
                         
-                        <label for="weekendId">Weekend</label>
+                        <label for="weekendId">@lang('auth.week')</label>
                         <select wire:model.defer="perInfo.weekendId" class="select2_weekend custom-select rounded-0" id="weekendId" multiple="multiple">
                             @foreach ($weekends as $weekend)
                                 <option value="{{ $weekend->id }}">{{ $weekend->dayName }}</option>
@@ -102,7 +102,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                 </button>
             </div>
           </div>
@@ -129,7 +129,7 @@
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
 
-                    <span>Add Special Employees Vacations</span>
+                    <span>@lang('auth.addSpecialVac')</span>
               </h5>
             </div>
             <div class="modal-body">
@@ -138,14 +138,14 @@
                     <div class=" col-md-12">
                     <div wire:ignore class="form-group">
                     
-                    <label for="centerId">Centers</label>
+                    <label for="centerId">@lang('auth.cenTitle')</label>
                         <select wire:model.defer="perInfo.centerId" class="select2_center custom-select rounded-0" id="centerId" multiple="multiple">
                             @foreach ($centers as $center)
                                 <option value="{{ $center->id }}">{{ $center->centerName }}</option>
                             @endforeach
                         </select>
                         <br>
-                        <label for="employeeId">Employees</label>
+                        <label for="employeeId">@lang('auth.empTitle')</label>
                         <select wire:model.defer="perInfo.employeeId" class="select2_employee custom-select rounded-0" id="employeeId" multiple="multiple">
                             @foreach ($employees as $employee)
                                 <option value="{{ $employee->id }}">{{ $employee->fullName }}</option>
@@ -153,7 +153,7 @@
                         </select>
 
                         
-<input id="chkall" type="checkbox" > <b>Select All</b>
+<input id="chkall" type="checkbox" > <b>@lang('auth.selectAll')</b>
 <br>
                     </div>
 </div>
@@ -164,7 +164,7 @@
                     
                     
                         
-                        <label for="countId">Add Vacation Count</label>
+                        <label for="countId">@lang('auth.addVacCount')</label>
                         <input type="number" wire:model.defer="perInfo.countId" id="countId" value="0" class="form-control @error('countId') is-invalid @enderror">
 </div>
 </div>
@@ -176,7 +176,7 @@
                   
                     
                         
-                        <label for="vacationDate">Add Vacation Date</label>
+                        <label for="vacationDate">@lang('auth.addVacDate')</label>
                         <input type="date" wire:model.defer="perInfo.vacationDate" class="form-control @error('vacationDate') is-invalid @enderror dis" id="vacationDate">
                         @error('vacationDate')
                         <div class="invalid-feedback">
@@ -189,7 +189,7 @@
                     
                     
                         
-                        <label for="firstTime">Add Vacation Start time</label>
+                        <label for="firstTime">@lang('auth.addVacStartTime')</label>
                         <input type="time" wire:model.defer="perInfo.firstTime" class="form-control @error('firstTime') is-invalid @enderror dis" id="firstTime">
                         @error('firstTime')
                         <div class="invalid-feedback">
@@ -201,7 +201,7 @@
                    
                     
                         
-                        <label for="secondTime">Add Vacation End Time</label>
+                        <label for="secondTime">@lang('auth.addVacEndTime')</label>
                         <input type="time" wire:model.defer="perInfo.secondTime" class="form-control @error('secondTime') is-invalid @enderror dis" id="secondTime">
                         @error('secondTime')
                         <div class="invalid-feedback">
@@ -213,7 +213,7 @@
                
                     
                         
-                        <label for="reason">Add Vacation Reson</label>
+                        <label for="reason">@lang('auth.addVacReason')</label>
                         <input type="text" wire:model.defer="perInfo.reason" class="form-control @error('reason') is-invalid @enderror dis" id="reason">
                         @error('reason')
                         <div class="invalid-feedback">
@@ -226,7 +226,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                 </button>
             </div>
           </div>
@@ -252,9 +252,9 @@
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
                 @if ($showEditHolidayForm)
-                    <span>Edit Holiday</span>
+                    <span>@lang('auth.editHol')</span>
                 @else
-                    <span>Add new Holiday</span>
+                    <span>@lang('auth.addNewHol')</span>
                 @endif
               </h5>
             </div>
@@ -262,7 +262,7 @@
                 <div class="form-row">
                    @if(!$this->showEditHolidayForm)
                     <div class="form-group col-md-12">
-                        <label for="holidayName">Holiday Name</label>
+                        <label for="holidayName">@lang('auth.holidayName')</label>
                         <input wire:model.defer="perInfo.holidayName" type="text" class="form-control @error('holidayName') is-invalid @enderror" id="holidayName">
                         @error('holidayName')
                         <div class="invalid-feedback">
@@ -271,7 +271,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="holidayFirstDate">Holiday From Date</label>
+                        <label for="holidayFirstDate">@lang('auth.holidayFromDate')</label>
                         <input wire:model.defer="perInfo.holidayFirstDate" type="date" class="form-control @error('holidayFirstDate') is-invalid @enderror" id="holidayFirstDate">
                         @error('holidayFirstDate')
                         <div class="invalid-feedback">
@@ -280,7 +280,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="holidaySecondDate">Holiday To Date</label>
+                        <label for="holidaySecondDate">@lang('auth.holidayToDate')</label>
                         <input wire:model.defer="perInfo.holidaySecondDate" type="date" class="form-control @error('holidaySecondDate') is-invalid @enderror" id="holidaySecondDate">
                         @error('holidaySecondDate')
                         <div class="invalid-feedback">
@@ -290,7 +290,7 @@
                     </div>
                     @else
                     <div class="form-group col-md-6">
-                        <label for="holidayName">Holiday Name</label>
+                        <label for="holidayName">@lang('auth.holidayName')</label>
                         <input wire:model.defer="perInfo.holidayName" type="text" class="form-control @error('holidayName') is-invalid @enderror" id="holidayName">
                         @error('holidayName')
                         <div class="invalid-feedback">
@@ -299,7 +299,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="holidayDate">Holiday Date</label>
+                        <label for="holidayDate">@lang('auth.holidayDate')</label>
                         <input wire:model.defer="perInfo.holidayDate" type="date" class="form-control @error('holidayDate') is-invalid @enderror" id="holidayDate">
                         @error('holidayDate')
                         <div class="invalid-feedback">
@@ -309,8 +309,8 @@
                     </div>
                     @endif
                     <div class="form-group col-md-12">
-                        <label for="notes">Notes</label>
-                        <textarea wire:model.defer="perInfo.note" type="text" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="Notes" rows="5" cols="10"></textarea>
+                        <label for="notes">@lang('auth.notes')</label>
+                        <textarea wire:model.defer="perInfo.note" type="text" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="@lang('auth.notes')" rows="5" cols="10"></textarea>
                         @error('note')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -323,9 +323,9 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
                     @if ($showEditHolidayForm)
-                        <span>Save Changes</span>
+                        <span>@lang('auth.saveChanges')</span>
                     @else
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                     @endif
                 </button>
             </div>
@@ -343,10 +343,10 @@
                         <table class="table table-hover" width="100%">
                             <thead>
                             <tr>
-                                <th scope="col">Holiday Name</th>
-                                <th scope="col">Holiday Date</th>
-                                <th scope="col">Holiday Notes</th>
-                                <th scope="col">Options</th>
+                                <th scope="col">@lang('auth.holidayName')</th>
+                                <th scope="col">@lang('auth.holidayDate')</th>
+                                <th scope="col">@lang('auth.notes')</th>
+                                <th scope="col">@lang('auth.options')</th>
 
                             </tr>
                             </thead>
@@ -383,17 +383,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete Holiday</h5>
+              <h5 class="modal-title" id="exampleModalLabel">@lang('auth.deleteHol')</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <h5>Are You Sure You Want To Delete This Holiday ?</h5>
+                <h5>@lang('auth.deleteHolMsg')</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
-                <button wire:click.prevent="delete_holiday( {{ $holiday }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>@lang('auth.cancel')</button>
+                <button wire:click.prevent="delete_holiday( {{ $holiday }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>@lang('auth.delete')</button>
             </div>
           </div>
         </div>

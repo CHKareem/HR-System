@@ -3,12 +3,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Vacations</h1>
+            <h1 class="m-0">@lang('auth.vacTitle')</h1>
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active">Vacations</li>
+                <li class="breadcrumb-item"><a href="dashboard">@lang('auth.dashTitle')</a></li>
+                <li class="breadcrumb-item active">@lang('auth.vacTitle')</li>
             </ol>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="small-box bg-success">
                 <div class="inner">
                     <h3> {{ $officialVacationNameCount }} </h3>
-                    <p>All Vacation Names</p>
+                    <p>@lang('auth.allVacNames')</p>
                </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -36,7 +36,7 @@
                 <div class="small-box bg-success">
                 <div class="inner">
                     <h3> {{ $officialVacationTypeCount }} </h3>
-                    <p>All Vacation Types</p>
+                    <p>@lang('auth.allVacTypes')</p>
                </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -48,7 +48,7 @@
                 <div class="small-box bg-success">
                 <div class="inner">
                 <h3>{{ $employeesVacationsCount }}</h3>
-                    <p>All Employees Vacations</p>
+                    <p>@lang('auth.allEmpsVacs')</p>
                       </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -72,14 +72,14 @@
                 <form wire:submit.prevent="{{ $showEditVacationNameForm? 'edit_vacation_name' : 'new_vacation_name' }}" autocomplete="off">
                 <h5 class="modal-title" id="exampleModalLabel">
                 @if ($showEditVacationNameForm)
-                    <span>Edit Vacation Name</span>
+                    <span>@lang('auth.editVacName')</span>
                 @else
-                    <span>Add New Vacation Name</span>
+                    <span>@lang('auth.addNewVacName')</span>
                 @endif
 </h5><br>
 <div class="d-flex justify-content-between">
 <div class="col-6">
-                        <input wire:model.defer="perInfo.vacationName" type="text" class="form-control @error('vacationName') is-invalid @enderror" id="vacationName" placeholder="Vacation Name">
+                        <input wire:model.defer="perInfo.vacationName" type="text" class="form-control @error('vacationName') is-invalid @enderror" id="vacationName" placeholder="@lang('auth.vacationName')">
                         @error('vacationName')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -90,9 +90,9 @@
                         <button class="btn btn-primary">
                                 <i class="fa fa-plus-circle mr-2"></i> 
                                 @if ($showEditVacationNameForm)
-                        <span>Save Changes</span>
+                        <span>@lang('auth.saveChanges')</span>
                     @else
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                     @endif
                             </button>        
 </div>
@@ -104,14 +104,14 @@
                 <form wire:submit.prevent="{{ $showEditVacationTypeForm? 'edit_vacation_type' : 'new_vacation_type' }}" autocomplete="off">
                 <h5 class="modal-title" id="exampleModalLabel">
                 @if ($showEditVacationTypeForm)
-                    <span>Edit Vacation Type</span>
+                    <span>@lang('auth.editVacType')</span>
                 @else
-                    <span>Add New Vacation Type</span>
+                    <span>@lang('auth.addNewVacType')</span>
                 @endif
 </h5><br>
 <div class="d-flex justify-content-between">
 <div class="col-6">
-                        <input wire:model.defer="perInfo.vacationType" type="text" class="form-control @error('vacationType') is-invalid @enderror" id="vacationType" placeholder="Vacation Type">
+                        <input wire:model.defer="perInfo.vacationType" type="text" class="form-control @error('vacationType') is-invalid @enderror" id="vacationType" placeholder="@lang('auth.vacationType')">
                         @error('vacationType')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -122,9 +122,9 @@
                         <button class="btn btn-primary">
                                 <i class="fa fa-plus-circle mr-2"></i> 
                                 @if ($showEditVacationTypeForm)
-                        <span>Save Changes</span>
+                        <span>@lang('auth.saveChanges')</span>
                     @else
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                     @endif
                             </button>        
 </div>
@@ -143,8 +143,8 @@
                         <table class="table table-hover" width="100%">
                             <thead>
                             <tr>
-                            <th scope="col">Vacation Name</th>
-                            <th scope="col">Options</th>
+                            <th scope="col">@lang('auth.vacationName')</th>
+                            <th scope="col">@lang('auth.options')</th>
 
                             </tr>
                             </thead>
@@ -172,8 +172,8 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Vacation Type</th>
-                                <th scope="col">Options</th>
+                                <th scope="col">@lang('auth.vacationType')</th>
+                                <th scope="col">@lang('auth.options')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -208,23 +208,23 @@
                 <div class="card card-primary card-outline">
                     <div class="card-header">
 
-                    <h5 class="modal-title">Filter Data Between Two Dates</h5>
+                    <h5 class="modal-title">@lang('auth.filterDate')</h5>
                      <br>
 
                         <div class="d-flex justify-content-between">
 
                         <div class="form-group col-md-3 col-3">
-                        <label for="firstDate">First Date</label>
+                        <label for="firstDate">@lang('auth.firstDate')</label>
                         <input wire:model="firstDate" type="date" class="form-control" id="firstDate">
                     </div>
 
                     <div class="form-group col-md-3 col-3">
-                        <label for="secondDate">Second Date</label>
+                        <label for="secondDate">@lang('auth.secondDate')</label>
                         <input wire:model="secondDate" type="date" class="form-control" id="secondDate">
                     </div>
 
                     <div class="form-group col-md-3 col-3">
-                    <label for="employeeId">Employee Name</label>
+                    <label for="employeeId">@lang('auth.employeeName')</label>
                         <div class="search-box">
                           <input wire:model="searchEmployee" wire:keyup="searchResult" type="text" class="form-control" id="employeeId" placeholder="Enter Employee Name">
                         
@@ -255,7 +255,7 @@
                     <div class="form-group col-md-3 col-3">
                         <br>
                         <button wire:click.prevent="show_vacation_form" class="btn btn-primary">
-                                <i class="fa fa-plus-circle mr-2"></i> Import Vacation Log
+                                <i class="fa fa-plus-circle mr-2"></i> @lang('auth.vacImport')
                             </button>
                     </div>
                         </div>
@@ -266,14 +266,14 @@
                         <table class="table table-hover" width="100%">
                             <thead>
                             <tr>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Vacation Name</th>
-                            <th scope="col">Vacation Date</th>
-                            <th scope="col">Vacation Type</th>
-                            <th scope="col">Vacation Duration</th>
-                            <th scope="col">Vacation Reason</th>
-                            <th scope="col">Vacation Authorised</th>
-                            <th scope="col">Options</th>
+                            <th scope="col">@lang('auth.employeeName')</th>
+                            <th scope="col">@lang('auth.vacationName')</th>
+                            <th scope="col">@lang('auth.vacationDate')</th>
+                            <th scope="col">@lang('auth.vacationType')</th>
+                            <th scope="col">@lang('auth.vacationDuration')</th>
+                            <th scope="col">@lang('auth.vacationReason')</th>
+                            <th scope="col">@lang('auth.vacationAuth')</th>
+                            <th scope="col">@lang('auth.options')</th>
 
                             </tr>
                             </thead>
@@ -355,17 +355,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete Vacation Name</h5>
+              <h5 class="modal-title" id="exampleModalLabel">@lang('auth.deleteVacName')</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <h5>Are You Sure You Want To Delete This Vacation Name ?</h5>
+                <h5>@lang('auth.deleteVacNameMsg')</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
-                <button wire:click.prevent="delete_vacation_name( {{ $vacation }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> @lang('auth.cancel')</button>
+                <button wire:click.prevent="delete_vacation_name( {{ $vacation }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i> @lang('auth.delete')</button>
             </div>
           </div>
         </div>
@@ -377,17 +377,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabelType">Delete Vacation Type</h5>
+              <h5 class="modal-title" id="exampleModalLabelType">@lang('auth.deleteVacType')</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <h5>Are You Sure You Want To Delete This Vacation Type ?</h5>
+                <h5>@lang('auth.deleteVacTypeMsg')</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
-                <button wire:click.prevent="delete_vacation_type( {{ $vacationType }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> @lang('auth.cancel')</button>
+                <button wire:click.prevent="delete_vacation_type( {{ $vacationType }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i> @lang('auth.delete')</button>
             </div>
           </div>
         </div>
@@ -398,17 +398,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabelVacations">Delete Vacation</h5>
+              <h5 class="modal-title" id="exampleModalLabelVacations">@lang('auth.deleteVac')</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <h5>Are You Sure You Want To Delete This Vacation ?</h5>
+                <h5>@lang('auth.deleteVacMsg')</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
-                <button wire:click.prevent="delete_employees_vacations( {{ $employeesVacation }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> @lang('auth.cancel')</button>
+                <button wire:click.prevent="delete_employees_vacations( {{ $employeesVacation }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i> @lang('auth.delete')</button>
             </div>
           </div>
         </div>
@@ -427,7 +427,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                    <span>Add Excel File</span>
+                    <span>@lang('auth.addExcel')</span>
               </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -438,8 +438,8 @@
                     <div class="form-group col">
 
                         <label for="file" class="drop-container">
-  <span class="drop-title">Drop files here</span>
-  or
+  <span class="drop-title">@lang('auth.drop')</span>
+  @lang('auth.or')
   <input type="file" id="file" name="file" required>
 </label>
 
@@ -449,10 +449,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>@lang('auth.cancel')</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
                    
-                        <span>Import File</span>
+                        <span>@lang('auth.importFile')</span>
 
                 </button>
             </div>
@@ -470,7 +470,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabelEmployeeVacation">
-                    <span>Edit Employee Vacation</span>
+                    <span>@lang('auth.editEmpsVacs')</span>
               </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -480,7 +480,7 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
-                        <label for="employeeId">ID</label>
+                        <label for="employeeId">@lang('auth.id')</label>
                         <input wire:model.defer="perInfo.employee_id" type="text" class="form-control @error('employeeId') is-invalid @enderror" id="employeeId" disabled>
                         @error('employeeId')
                         <div class="invalid-feedback">
@@ -489,16 +489,16 @@
                         @enderror
                     </div>
                      <div class="form-group col-md-6">
-                        <label for="employeeName">Full Name</label>
+                        <label for="employeeName">@lang('auth.fullName')</label>
                         @if($FullName !== Null)
                        
                         <input value="{{ $FullName->employees->fullName }}" type="text" class="form-control" id="employeeName" disabled>
                         @endif
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="vacationId">Vacation name</label>
+                        <label for="vacationId">@lang('auth.vacationName')</label>
                         <select wire:model.defer="perInfo.vacation_id" type="text" class="custom-select rounded-0 @error('vacationId') is-invalid @enderror" id="vacationId">
-                        <option selected>Choose Vacation Name:</option>
+                        <option selected>@lang('auth.chooseVacName'):</option>
                             @foreach ($vacationNamesAll as $vacationName)
                                 <option value="{{ $vacationName->id }}">{{ $vacationName->vacationName }}</option>
                             @endforeach
@@ -510,7 +510,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="vacationDate">Vacation Date</label>
+                        <label for="vacationDate">@lang('auth.vacationDate')</label>
                         <input wire:model.defer="perInfo.vacationDate" type="date" class="form-control @error('vacationDate') is-invalid @enderror" id="vacationDate" placeholder="Enter Vacation Date">
                         @error('vacationDate')
                         <div class="invalid-feedback">
@@ -519,9 +519,9 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="typeId">Vacation Type</label>
+                        <label for="typeId">@lang('auth.vacationType')</label>
                         <select wire:model.defer="perInfo.type_id" type="text" class="custom-select rounded-0 @error('typeId') is-invalid @enderror" id="typeId">
-                        <option selected>Choose Vacation Type:</option>
+                        <option selected>@lang('auth.chooseVacType'):</option>
                             @foreach ($vacationTypesAll as $vacationType)
                                 <option value="{{ $vacationType->id }}">{{ $vacationType->vacationType }}</option>
                             @endforeach
@@ -533,7 +533,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="duration">Vacation Duration</label>
+                        <label for="duration">@lang('auth.vacationDuration')</label>
                         <input wire:model.defer="perInfo.duration" type="text" class="form-control @error('duration') is-invalid @enderror" id="duration" placeholder="Enter Vacation Duration">
                         @error('duration')
                         <div class="invalid-feedback">
@@ -542,7 +542,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="isAuth">Vacation Authorized</label>
+                        <label for="isAuth">@lang('auth.vacationAuth')</label>
                         <input wire:model.defer="perInfo.isAuthor" type="text" class="form-control @error('isAuth') is-invalid @enderror" id="isAuth" placeholder="is Authorized ({0} Not Author OR {1} is Author)">
                         @error('isAuth')
                         <div class="invalid-feedback">
@@ -551,7 +551,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="reason">Vacation Reason</label>
+                        <label for="reason">@lang('auth.vacationReason')</label>
                         <input wire:model.defer="perInfo.reason" type="text" class="form-control @error('reason') is-invalid @enderror" id="reason" placeholder="Enter Vacation Reason">
                         @error('reason')
                         <div class="invalid-feedback">
@@ -563,9 +563,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i> Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>@lang('auth.cancel')</button>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>
-                        <span>Save Changes</span>
+                        <span>@lang('auth.saveChanges')</span>
                 </button>
             </div>
           </div>
@@ -589,12 +589,12 @@
 					  <i class="material-icons fa fa-times" aria-hidden="true"></i>
 				  </div>	
 			  </div>
-              <h4 class="modal-title">ERROR</h4>
+              <h4 class="modal-title">@lang('auth.error')</h4>
 			  <div class="modal-body">
 				  <p class="text-center">{{$error}}</p>
 			  </div>
 			  <div class="modal-footer">
-				  <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
+				  <button class="btn btn-danger btn-block" data-dismiss="modal">@lang('auth.ok')</button>
 			  </div>
 		  </div>
 	  </div>
@@ -618,12 +618,12 @@
 					  <i class="material-icons fa fa-check" aria-hidden="true"></i>
 				  </div>				
 			  </div>
-              <h4 class="modal-title">Success</h4>	
+              <h4 class="modal-title">@lang('auth.success')</h4>	
 			  <div class="modal-body">
 				  <p class="text-center">{{$message}}</p>
 			  </div>
 			  <div class="modal-footer">
-				  <button class="btn btn-success btn-block" data-dismiss="modal" id="button">OK</button>
+				  <button class="btn btn-success btn-block" data-dismiss="modal" id="button">@lang('auth.ok')</button>
 			  </div>
 		  </div>
 	  </div>

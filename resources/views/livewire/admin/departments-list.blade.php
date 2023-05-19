@@ -3,12 +3,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Departments</h1>
+            <h1 class="m-0">@lang('auth.depTitle')</h1>
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active">Departments</li>
+                <li class="breadcrumb-item"><a href="dashboard">@lang('auth.dashTitle')</a></li>
+                <li class="breadcrumb-item active">@lang('auth.depTitle')</li>
             </ol>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="inner">
                     <h3> {{ $departments->total() }} </h3>
 
-                    <p>All Departments</p>
+                    <p>@lang('auth.allDep')</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-building"></i>
@@ -41,14 +41,14 @@
                 <form wire:submit.prevent="{{ $showEditDepartmentForm? 'edit_department' : 'newDepartmentForm' }}" autocomplete="off">
                 <h5 class="modal-title" id="exampleModalLabel">
                 @if ($showEditDepartmentForm)
-                    <span>Edit Department</span>
+                    <span>@lang('auth.editDep')</span>
                 @else
-                    <span>Add New Department</span>
+                    <span>@lang('auth.addNewDep')</span>
                 @endif
 </h5><br>
 <div class="d-flex justify-content-between">
 <div class="col-10">
-                        <input wire:model.defer="perInfo.departmentName" type="text" class="form-control @error('departmentName') is-invalid @enderror" id="departmentName" placeholder="Department Name">
+                        <input wire:model.defer="perInfo.departmentName" type="text" class="form-control @error('departmentName') is-invalid @enderror" id="departmentName" placeholder="@lang('auth.departmentName')">
                         @error('departmentName')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -59,9 +59,9 @@
                         <button class="btn btn-primary">
                                 <i class="fa fa-plus-circle mr-2"></i>
                                 @if ($showEditDepartmentForm)
-                        <span>Save Changes</span>
+                        <span>@lang('auth.saveChanges')</span>
                     @else
-                        <span>Save</span>
+                        <span>@lang('auth.save')</span>
                     @endif
                             </button>
 </div>
@@ -73,8 +73,8 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Department</th>
-                                <th scope="col">Options</th>
+                                <th scope="col">@lang('auth.dep')</th>
+                                <th scope="col">@lang('auth.options')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -106,17 +106,17 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Delete Department</h5>
+              <h5 class="modal-title" id="exampleModalLabel">@lang('auth.deleteDep')</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <h5>Are you sure you want to delete this Department ?</h5>
+                <h5>@lang('auth.deleteDepMsg')</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
-                <button wire:click.prevent="delete_department( {{ $department }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times mr-1"></i>@lang('auth.cancel')</button>
+                <button wire:click.prevent="delete_department( {{ $department }} )" type="button" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>@lang('auth.delete')</button>
             </div>
           </div>
         </div>

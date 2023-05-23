@@ -273,38 +273,56 @@ class ImportEmployee implements ToModel, WithStartRow, WithValidation
 
             '13' => function($attribute, $value, $onFailure) {
                 if($this->validateDate($value) && !is_string($value)){
-                    $onFailure('Column[16] This Value MUST BE DATE');
+                    $onFailure('Column[14] This Value MUST BE DATE');
                     }
             },
 
             '14' => function($attribute, $value, $onFailure) {
                 if(!is_string($value) || is_numeric($value)){
-                $onFailure('Column[17] This Value MUST BE TEXT');
+                $onFailure('Column[15] This Value MUST BE TEXT');
                 }
             },
 
             '15' => function($attribute, $value, $onFailure) {
                 if(!is_int($value) && !is_string($value)){
-                    $onFailure('Column[18] This Value MUST BE INT');
+                    $onFailure('Column[16] This Value MUST BE INT');
                     }
                     if($value < 0){
-                        $onFailure('Column[18] This Value MUST Have POSITIVE Numbers');
+                        $onFailure('Column[16] This Value MUST Have POSITIVE Numbers');
                     }
             },
 
             '16' => function($attribute, $value, $onFailure) {
                 if(!is_string($value) || is_numeric($value)){
-                    $onFailure('Column[19] This Value MUST BE TEXT');
+                    $onFailure('Column[17] This Value MUST BE TEXT');
                 }
             },
 
             '17' => function($attribute, $value, $onFailure) {
                 if(!is_string($value) || is_numeric($value)){
-                    $onFailure('Column[20] This Value MUST BE TEXT');
+                    $onFailure('Column[18] This Value MUST BE TEXT');
                 }
             },
 
             '18' => function($attribute, $value, $onFailure) {
+                if(!is_int($value) && !is_string($value)){
+                $onFailure('Column[19] This Value MUST BE INT OR TEXT');
+                }
+                if($value < 0){
+                    $onFailure('Column[19] This Value MUST Have POSITIVE Numbers');
+                }
+            },
+
+            '19' => function($attribute, $value, $onFailure) {
+                if(!is_int($value) && !is_string($value)){
+                $onFailure('Column[20] This Value MUST BE INT OR TEXT');
+                }
+                if($value < 0){
+                    $onFailure('Column[20] This Value MUST Have POSITIVE Numbers');
+                }
+            },
+
+            '20' => function($attribute, $value, $onFailure) {
                 if(!is_int($value) && !is_string($value)){
                 $onFailure('Column[21] This Value MUST BE INT OR TEXT');
                 }
@@ -313,30 +331,12 @@ class ImportEmployee implements ToModel, WithStartRow, WithValidation
                 }
             },
 
-            '19' => function($attribute, $value, $onFailure) {
-                if(!is_int($value) && !is_string($value)){
-                $onFailure('Column[22] This Value MUST BE INT OR TEXT');
-                }
-                if($value < 0){
-                    $onFailure('Column[22] This Value MUST Have POSITIVE Numbers');
-                }
-            },
-
-            '20' => function($attribute, $value, $onFailure) {
-                if(!is_int($value) && !is_string($value)){
-                $onFailure('Column[23] This Value MUST BE INT OR TEXT');
-                }
-                if($value < 0){
-                    $onFailure('Column[23] This Value MUST Have POSITIVE Numbers');
-                }
-            },
-
             '21' => function($attribute, $value, $onFailure) {
                 if(!is_string($value) && is_numeric($value)){
-                    $onFailure('Column[24] This Value MUST BE TEXT');
+                    $onFailure('Column[22] This Value MUST BE TEXT');
                     }
                     if(strlen($value) != 6 && strlen($value) != 10 && strlen($value) != 1){
-                        $onFailure('Column[24] This Value MUST BE "Active" OR "Not Active" OR "1" OR "0" ');
+                        $onFailure('Column[22] This Value MUST BE "Active" OR "Not Active" OR "1" OR "0" ');
                     }
             },
 

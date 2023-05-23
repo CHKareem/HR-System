@@ -130,7 +130,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-centerid">
-                        {{-- {{ $positions->links() }} --}}
+                         {{ $positions->links() }}
                     </div>
                 </div>
             </div>

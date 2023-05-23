@@ -42,5 +42,5 @@
             @endforeach
     @endif
 
-<a href="{{ route('previewPDF') }}" class="btnprn">preview</a>
+{{-- <a href="{{ route('previewPDF') }}" class="btnprn">preview</a> --}}
 </div>

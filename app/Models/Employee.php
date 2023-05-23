@@ -42,7 +42,7 @@ class Employee extends Model
     ];
 
     public function attendences(){
-        return $this->hasMany(Attendee::class);
+        return $this->hasMany(Attendee::class, 'employee_id');
     }
 
     public function employeesvacations(){

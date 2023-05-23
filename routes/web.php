@@ -69,10 +69,10 @@ Route::group(['prefix' => '{locale}',
     Route::get('holidays', HolidaysList::class)->name('holidays');
 
 
-Route::get('/exportPDF',[ShowDiscounts::class,
-'exportPDF'])->name('exportPDF');
-Route::get('/previewPDF',[ShowDiscounts::class,
-'previewPDF'])->name('previewPDF');
+// Route::get('/exportPDF',[ShowDiscounts::class,
+// 'exportPDF'])->name('exportPDF');
+// Route::get('/previewPDF',[ShowDiscounts::class,
+// 'previewPDF'])->name('previewPDF');
 
 });
 // });

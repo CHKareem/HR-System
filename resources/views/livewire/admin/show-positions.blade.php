@@ -7,12 +7,12 @@
             <b>{{$employeePosition->positions->positionName}}</b>
   </div>
   <div class="card-body">
-    <h5 class="card-title float-none">Employee Name: <b class="ml-2">{{$employeePosition->employees->fullName}}</b></h5>
-    <p class="card-text">Start Date: <b class="ml-2">{{$employeePosition->startDate}}</b><br>
+    <h5 class="card-title float-none">@lang('auth.employeeName'): <b class="ml-2">{{$employeePosition->employees->fullName}}</b></h5>
+    <p class="card-text">@lang('auth.startDate'): <b class="ml-2">{{$employeePosition->startDate}}</b><br>
     @if($employeePosition->endDate)
-    End Date: <b class="ml-2">{{$employeePosition->endDate}}</b>
+    @lang('auth.endDate'): <b class="ml-2">{{$employeePosition->endDate}}</b>
     @else
-    End Date: <b class="ml-2">Currently Working In This Position</b>
+    @lang('auth.endDate'): <b class="ml-2">Currently Working In This Position</b>
     @endif
     </p>
   </div>

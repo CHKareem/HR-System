@@ -5,16 +5,16 @@
                 <div class="col-lg-12">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h5 class="modal-title">Filter Data Between</h5>
+                                <h5 class="modal-title">@lang('auth.filterDate')</h5>
                             </div>
                         </div>
                         <div class="card-body d-flex justify-content-between">
                             <div class="form-group col-md-6">
-                                <label for="firstDate">Start Date</label>
+                                <label for="firstDate">@lang('auth.firstDate')</label>
                                 <input wire:model="firstDate" type="date" class="form-control" id="firstDate">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="secondDate">End Date</label>
+                                <label for="secondDate">@lang('auth.secondDate')</label>
                                 <input wire:model="secondDate" type="date" class="form-control" id="secondDate">
                             </div>
                         </div>
@@ -31,10 +31,10 @@
             <b>{{$employeeDiscount->vacations->vacationName}} - {{$employeeDiscount->vacationtypes->vacationType}}</b>
   </div>
   <div class="card-body">
-    <h5 class="card-title float-none">Employee Name: <b class="ml-2">{{$employeeDiscount->employees->fullName}}</b></h5>
-    <p class="card-text">Vacation Date: <b class="ml-2">{{$employeeDiscount->vacationDate}}</b><br>
-    Discount: <b class="ml-2">{{$employeeDiscount->discount}}</b><br>
-    Vacation Duration: <b class="ml-2">{{$employeeDiscount->duration}}</b>
+    <h5 class="card-title float-none">@lang('auth.employeeName'): <b class="ml-2">{{$employeeDiscount->employees->fullName}}</b></h5>
+    <p class="card-text">@lang('auth.vacationDate'): <b class="ml-2">{{$employeeDiscount->vacationDate}}</b><br>
+    @lang('auth.discount'): <b class="ml-2">{{$employeeDiscount->discount}}</b><br>
+    @lang('auth.duration'): <b class="ml-2">{{$employeeDiscount->duration}}</b>
     </p>
   </div>
 </div>

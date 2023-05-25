@@ -78,12 +78,11 @@ public function get_hourly_vac_count($empId){
  }
  if($row[6] == 4){
     $discount = 30;
- }
- if($row[6] == 3){
+ }if($row[6] == 3){
     $discount = -$duration;
- }
- if($row[4] != null && $row[5] != null){
-    
+ }if($row[4] !== null && $row[5] !== null){
+     
+
     $from = $row[4];
 
     $to = $row[5];
@@ -134,7 +133,6 @@ public function get_hourly_vac_count($empId){
     }
 
 if($row[6] == 4){
-        // dd($duration);
         DB::table('employees')->where('id', $row[0])->increment('healthCount', $duration);
         }
         
@@ -151,16 +149,7 @@ if($row[6] == 4){
             'isAuthor' => $row[8] == 'Authorized' ? 1 : 0,
             'isCheck' => $isCheck,
         ]);
-
-        $this->empInfo = null;
-        $this->firstDate = null;
-        $this->durations = null;
-        $this->daysDurations = null;
-        $this->firstTime = null;
-        $this->secondTime = null;
-        $this->vacationID = null;
-        $this->duration = null;
-    }
+}
 
     }
 
@@ -186,13 +175,13 @@ if($row[6] == 4){
 
                 '1' => function($attribute, $value, $onFailure) {
                     if(!is_int($value)){
-                        $onFailure('Column[2] This Value MUST BE INT');
+                        $onFailure('Column[1] This Value MUST BE INT');
                     }
                     if($value < 0){
-                        $onFailure('Column[2] This Value MUST Have POSITIVE Numbers');
+                        $onFailure('Column[1] This Value MUST Have POSITIVE Numbers');
                     }
                     if(strlen((string)$value) > 2){
-                    $onFailure('Column[2] This Value MUST NOT Have More Than 2 Characters');
+                    $onFailure('Column[1] This Value MUST NOT Have More Than 2 Characters');
                     }else{
                     $this->vacationID = $value;
                     }

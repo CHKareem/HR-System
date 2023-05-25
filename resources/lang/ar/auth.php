@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 return [
 
@@ -33,7 +33,7 @@ return [
     'holTitle' => 'العطل',
     'repTitle' => 'التقارير',
     'exportTitle' => 'تقارير حسب الطلب',
-    'selectFilter' => 'Select Filter',
+    'selectFilter' => 'فلترة البيانات حسب',
     'reason' => 'السبب',
     'author' => 'مصرح بذلك',
     'inTime' => 'وقت الدخول',

@@ -104,7 +104,7 @@ if($column[2] == null){
                     DB::table('employees_vacations')->insert([
         'employee_id' => $column[0],
         'vacation_id' => 1,
-        'vacationDate' => Carbon::parse($column[1]),
+        'vacationDate' => $column[1],
         'type_id' => 1,
         'duration' => 1,
         'reason' => 'No Attendance Log For This Day',
@@ -118,7 +118,7 @@ if($column[2] == null){
 if(!in_array(Carbon::parse($column[1])->format('l'),$weekendDate) && !in_array(Carbon::parse($column[1])->format('Y-m-d'),$holidayDate)){
 Attendee::create([
     'employee_id' => $column[0],
-    'logDate' => Carbon::parse($column[1]),
+    'logDate' => $column[1],
     'logTime' => null,
     'logIn' => null,
     'logOut' => null,
@@ -147,7 +147,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => $column[1],
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'No Login or Logout Time',
@@ -157,7 +157,7 @@ if( $column[2] != null ){
                     ]);
                     return new Attendee([
                         'employee_id' => $column[0],
-                        'logDate' => Carbon::parse($column[1]),
+                        'logDate' => $column[1],
                         'logTime' => $column[2],
                         'logIn' => $login,
                         'logOut' => $logout,
@@ -168,7 +168,7 @@ if( $column[2] != null ){
                 //     DB::table('employees_vacations')->insert([
                 //         'employee_id' => $column[0],
                 //         'vacation_id' => 1,
-                //         'vacationDate' => Carbon::parse($column[1]),
+                //         'vacationDate' => $column[1],
                 //         'type_id' => 1,
                 //         'duration' => 1,
                 //         'reason' => 'No Login or Logout Time',
@@ -196,7 +196,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => $column[1],
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'more than 2 hours late',
@@ -213,7 +213,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 2,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => $column[1],
                         'type_id' => 2,
                         'duration' => $loginLate,
                         'reason' => ' Hourly Late ',
@@ -244,7 +244,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 2 hours late',
@@ -261,7 +261,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 2,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Late Vacation',
@@ -287,7 +287,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => $column[1],
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'more than 7 hours late',
@@ -304,7 +304,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 2,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => $column[1],
                         'type_id' => 1,
                         'duration' => $logoutLate,
                         'reason' => ' Hourly Vacation ',
@@ -333,7 +333,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 7 hours late',
@@ -350,7 +350,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Hourly Vacation',
@@ -362,7 +362,7 @@ if( $column[2] != null ){
                         // DB::table('employees_vacations')->insert([
                         //     'employee_id' => $column[0],
                         //     'vacation_id' => 2,
-                        //     'vacationDate' => Carbon::parse($column[1]),
+                        //     'vacationDate' => $column[1],
                         //     'type_id' => 1,
                         //     'duration' => $moreTimeTook,
                         //     'reason' => ' Extended Hourly Vacation',
@@ -389,7 +389,7 @@ if( $column[2] != null ){
                         DB::table('employees_vacations')->insert([
                             'employee_id' => $column[0],
                             'vacation_id' => 1,
-                            'vacationDate' => Carbon::parse($column[1]),
+                            'vacationDate' => $column[1],
                             'type_id' => 1,
                             'duration' => 1,
                             'reason' => 'more than 7 hours late',
@@ -406,7 +406,7 @@ if( $column[2] != null ){
                         DB::table('employees_vacations')->insert([
                             'employee_id' => $column[0],
                             'vacation_id' => 2,
-                            'vacationDate' => Carbon::parse($column[1]),
+                            'vacationDate' => $column[1],
                             'type_id' => 1,
                             'duration' => $loginLate,
                             'reason' => ' Hourly Vacation',
@@ -434,7 +434,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 7 hours late',
@@ -451,7 +451,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Hourly Vacation',
@@ -484,7 +484,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 7 hours late',
@@ -501,7 +501,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => $column[1],
                                 'type_id' => 1,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Hourly Vacation',
@@ -516,7 +516,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => $column[1],
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'More than 3 hours late',
@@ -532,7 +532,7 @@ if( $column[2] != null ){
 
             return new Attendee([
                 'employee_id' => $column[0],
-                'logDate' => Carbon::parse($column[1]),
+                'logDate' => $column[1],
                 'logTime' => $column[2],
                 'logIn' => $login,
                 'logOut' => $logout,

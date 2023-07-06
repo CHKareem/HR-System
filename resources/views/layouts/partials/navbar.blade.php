@@ -50,8 +50,8 @@
   <i class="fa fa-language"></i>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{url('en')}}">@lang('auth.english')</a>
-    <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}" href="{{url('ar')}}">@lang('auth.arabic')</a>
+<a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="{{ $newUrl }}">@lang('auth.english')</a>
+    <a class="dropdown-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}" href="{{ $newUrl}}">@lang('auth.arabic')</a>
   </div>
 </div>
         </li>

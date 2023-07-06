@@ -5,7 +5,7 @@ use App\Models\Employee;
 use DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Facades\View;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -59,5 +59,13 @@ class AppServiceProvider extends ServiceProvider
     //         dd($timeOfYear, $time2, $time2-$timeOfYear);
     //         DB::table('employees')->where('id', $yearlyCheck->id)->update(['workingYears' => Carbon::now()->diffInYears(Carbon::parse($timeOfYear))]);
     //    }
+
+     $thisUrl = url()->current().'/';
+     if (app()->getlocale() == 'en') {
+         $newUrl  = str_replace('/en/', '/ar/', $thisUrl);
+     }else{
+         $newUrl  = str_replace('/ar/', '/en/', $thisUrl);
+     }
+     View::share('newUrl', $newUrl);
     }
 }

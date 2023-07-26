@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Providers;
@@ -61,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
     //    }
 
      $thisUrl = url()->current().'/';
-     if (app()->getlocale() == 'en') {
+     if (strpos($thisUrl,'/en/') && app()->getlocale() == 'en') {
          $newUrl  = str_replace('/en/', '/ar/', $thisUrl);
      }else{
          $newUrl  = str_replace('/ar/', '/en/', $thisUrl);

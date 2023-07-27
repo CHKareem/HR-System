@@ -651,31 +651,31 @@ width:100%!important;
 
     $(".EditIcon").tooltip({
     placement: "bottom",
-    title: 'Edit',
+    title: "@lang('auth.edit')",
     html: true,
   });
 
   $(".DeleteIcon").tooltip({
     placement: "bottom",
-    title: 'Delete',
+    title: "@lang('auth.delete')",
     html: true,
   });
 
   $(".InfoIcon").tooltip({
     placement: "bottom",
-    title: 'Info',
+    title: "@lang('auth.info')",
     html: true,
   });
 
   $(".UnlinkIcon").tooltip({
     placement: "bottom",
-    title: 'Unlink',
+    title: "@lang('auth.unLink')",
     html: true,
   });
 
   $(".RelinkIcon").tooltip({
     placement: "bottom",
-    title: 'Relink',
+    title: "@lang('auth.reLink')",
     html: true,
   });
 
@@ -704,31 +704,31 @@ Livewire.hook('element.updated', (el, component) => {
 
     $(".EditIcon").tooltip({
     placement: "bottom",
-    title: 'Edit',
+    title: "@lang('auth.edit')",
     html: true,
   });
 
   $(".DeleteIcon").tooltip({
     placement: "bottom",
-    title: 'Delete',
+    title: "@lang('auth.delete')",
     html: true,
   });
 
   $(".InfoIcon").tooltip({
     placement: "bottom",
-    title: 'Info',
+    title: "@lang('auth.info')",
     html: true,
   });
 
   $(".UnlinkIcon").tooltip({
     placement: "bottom",
-    title: 'Unlink',
+    title: "@lang('auth.unLink')",
     html: true,
   });
 
   $(".RelinkIcon").tooltip({
     placement: "bottom",
-    title: 'Relink',
+    title: "@lang('auth.reLink')",
     html: true,
   });
 

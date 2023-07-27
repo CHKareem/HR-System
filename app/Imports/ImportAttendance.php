@@ -47,7 +47,8 @@ class ImportAttendance implements ToModel, WithStartRow
         foreach($vacationDates as $vacationDate){
             if($vacationDate->type_id == 3 || $vacationDate->type_id == 4 || $vacationDate->type_id == 5 || $vacationDate->type_id == 6 
             || $vacationDate->type_id == 9 || $vacationDate->type_id == 11 || $vacationDate->type_id == 12 || $vacationDate->type_id == 13
-            || $vacationDate->type_id == 19 || ($vacationDate->type_id == 1 && $vacationDate->vacation_id == 1)){
+            || $vacationDate->type_id == 19  || $vacationDate->type_id == 14 || $vacationDate->type_id == 15 || $vacationDate->type_id == 16
+            || $vacationDate->type_id == 17 || ($vacationDate->type_id == 1 && $vacationDate->vacation_id == 1)){
             return $vacationDate->vacationDate;
             // return array_push($this->vacTypes, $vacationDate->vacationDate);
             }

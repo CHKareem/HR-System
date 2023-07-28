@@ -57,6 +57,7 @@ return [
     'selectAll' => 'Select All',
      'expCusEmp' => 'Export Custom Employees',
      'expCusEmpCen' => 'Export Custom Employees Centers',
+     'expCusEmpDis' => 'Export Custom Employees discounts',
      'expCusEmpDep' => 'Export Custom Employees Departments',
      'expCusEmpPos' => 'Export Custom Employees Positions',
      'expCusEmpinfo' => 'Export Custom Employees Infos',

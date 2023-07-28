@@ -12,6 +12,7 @@ use App\Exports\ExportCustomEmployeeCenter;
 use App\Exports\ExportCustomEmployeePosition;
 use App\Exports\ExportCustomEmployeeInfos;
 use App\Exports\ExportCustomEmployeeDepartment;
+use App\Exports\ExportCustomEmployeeDiscount;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -157,5 +158,18 @@ class ShowExportables extends Component
 
     }
 
+    public function export_employees_discounts(){
+
+        if(!isset($this->perInfo['employeeId'])){
+            $this->perInfo['employeeId'] = [];
+        }
+        if(!isset($this->perInfo['firstDate'])){
+            $this->perInfo['firstDate'] = [];
+        }
+        if(!isset($this->perInfo['secondDate'])){
+            $this->perInfo['secondDate'] = [];
+        }
+        return Excel::download(new ExportCustomEmployeeDiscount([$this->perInfo['employeeId'], $this->perInfo['firstDate'], $this->perInfo['secondDate']]), 'CustomExportedEmployeesDiscounts.xlsx');
+    }
 
 }

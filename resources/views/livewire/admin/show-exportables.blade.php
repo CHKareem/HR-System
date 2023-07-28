@@ -7,7 +7,10 @@
 <button wire:click.prevent="export_employees" class="btn btn-primary mr-2">
                                 <i class="fa-solid fa-table mr-2 mr-2"></i> @lang('auth.expCusEmp')
                             </button>
-                            
+
+                            <button wire:click.prevent="export_employees_discounts" class="btn btn-primary mr-2">
+                                <i class="fa-solid fa-table mr-2 mr-2"></i> @lang('auth.expCusEmpDis')
+                            </button>                  
                            
                             <button wire:click.prevent="export_employees_centers" class="btn btn-primary mr-2">
                                 <i class="fa-solid fa-table mr-2 mr-2"></i> @lang('auth.expCusEmpCen')

@@ -73,7 +73,7 @@ class DiscountList extends Component
             
 
         $employeesVacations = EmployeesVacation::select('employee_id', 'type_id', 'discount', 'vacation_id')->
-        whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where([['vacation_id', 1], ['discount', '!=', 0]])->where(function ($query) {
+        whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where('vacation_id', 1)->where(function ($query) {
             $query->where('type_id', 1)
                   ->orWhere('type_id', 3)
                   ->orWhere('type_id', 4);

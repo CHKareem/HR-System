@@ -113,7 +113,7 @@
                                 <th scope="col">@lang('auth.fullName')</th>
                                 <th scope="col">@lang('auth.nationalNumber')</th>
                                 <th scope="col">@lang('auth.mobile')</th>
-                                <th scope="col">>@lang('auth.options')</th>
+                                <th scope="col">@lang('auth.options')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -489,6 +489,45 @@
 
 
     
+    {{-- Info vacation model --}}
+    <div wire:ignore.self class="modal fade" style="width:100%; height:100%;" id="emp_vacation-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">@lang('auth.empInfo')</h5>
+              <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+      @if($this->healthVacationCount)
+      @foreach($employeesHealthVacationCounts as $employeesHealthVacationCount)
+      {{$employeesHealthVacationCount->fullName}}<br><br>
+      @endforeach
+      @endif
+
+      @if($this->noPaymentVacationCount)
+      @foreach($employeesNoPaymentVacationCounts as $employeesNoPaymentVacationCount)
+      {{$employeesNoPaymentVacationCount->fullName}}<br><br>
+      @endforeach
+      @endif
+
+      @if($this->unlinkEmployees)
+      @foreach($employeesUnlinked as $employeeUnlinked)
+      {{ $employeeUnlinked->fullName }}       -       {{ $employeeUnlinked->quitDate }}<br><br>
+      @endforeach
+      @endif
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('auth.close')</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
+
     {{-- Position Employer form --}}
     <div wire:ignore.self class="modal fade" id="position-employer-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

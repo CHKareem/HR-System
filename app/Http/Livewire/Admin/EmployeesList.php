@@ -226,36 +226,39 @@ class EmployeesList extends Component
         }
     }
 
-    public function show_all_employees()
-    {
-        $this->allEmployees = true;
-        $this->healthVacationCount = false;
-        $this->noPaymentVacationCount = false;
-        $this->unlinkEmployees = false;
-    }
+    // public function show_all_employees()
+    // {
+    //     $this->allEmployees = true;
+    //     $this->healthVacationCount = false;
+    //     $this->noPaymentVacationCount = false;
+    //     $this->unlinkEmployees = false;
+    // }
 
     public function show_no_payment_vacation_employees()
     {
-        $this->noPaymentVacationCount = true;
         $this->healthVacationCount = false;
-        $this->allEmployees = false;
+        $this->noPaymentVacationCount = true;
+        // $this->allEmployees = false;
         $this->unlinkEmployees = false;
+        $this->dispatchBrowserEvent('show_emp_vacation_model');
     }
 
     public function show_health_vacation_employees()
     {
         $this->healthVacationCount = true;
         $this->noPaymentVacationCount = false;
-        $this->allEmployees = false;
+        // $this->allEmployees = false;
         $this->unlinkEmployees = false;
+        $this->dispatchBrowserEvent('show_emp_vacation_model');
     }
 
     public function show_unlink_employees()
     {
         $this->healthVacationCount = false;
         $this->noPaymentVacationCount = false;
-        $this->allEmployees = false;
+        // $this->allEmployees = false;
         $this->unlinkEmployees = true;
+        $this->dispatchBrowserEvent('show_emp_vacation_model');
     }
 
 }

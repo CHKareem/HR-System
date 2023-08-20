@@ -31,6 +31,9 @@ class DiscountList extends Component
     public $weekendCount = 0;
     protected $employeeId;
     protected $emp;
+    public $showdivEmployee = false;
+    public $searchEmployee = "";
+    public $recordsEmployee;
 
 
     public function render()
@@ -73,11 +76,18 @@ class DiscountList extends Component
             
 
         $employeesVacations = EmployeesVacation::select('employee_id', 'type_id', 'discount', 'vacation_id')->
-        whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where([['vacation_id', 1], ['discount', '!=', 0]])->where(function ($query) {
+        whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where('vacation_id', 1)->where(function ($query) {
             $query->where('type_id', 1)
                   ->orWhere('type_id', 3)
                   ->orWhere('type_id', 4);
         })->distinct('employee_id', 'type_id', 'discount', 'vacation_id')->get();
+
+        $employeesVacationsForUsers = EmployeesVacation::select('employee_id', 'type_id', 'discount', 'vacation_id')->
+        whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->where('vacation_id', 1)->where(function ($query) {
+            $query->where('type_id', 1)
+                  ->orWhere('type_id', 3)
+                  ->orWhere('type_id', 4);
+        })->where('employee_id', $this->searchEmployee)->distinct('employee_id', 'type_id', 'discount', 'vacation_id')->get();
 
         $vacations = EmployeesVacation::where([['vacation_id', 1], ['type_id', 1], ['employee_id', $this->emp], ['isAuthor', 1]])->
         whereBetween('vacationDate' ,[$this->firstDate,$this->secondDate])->get('vacationDate');
@@ -104,6 +114,7 @@ class DiscountList extends Component
             'vacationNames' => $vacationNames,
             'vacationTypes' => $vacationTypes,
             'employeesVacations' => $employeesVacations,
+            'employeesVacationsForUsers' => $employeesVacationsForUsers,
             'employees' => $employees,
             'daysDuration' => $daysDuration,
             'weekendCount' =>  $this->weekendCount,
@@ -118,6 +129,35 @@ class DiscountList extends Component
 
         ]);
     }
+
+
+    // Fetch records
+    public function searchResult(){
+
+        if(!empty($this->searchEmployee)){
+
+            $this->recordsEmployee = Employee::where('fullName','like','%'.$this->searchEmployee.'%')
+                      ->limit(5)
+                      ->get();          
+            $this->showdivEmployee = true;
+        }else{
+            $this->showdivEmployee = false;
+        }
+
+    }
+
+        // Fetch record by ID
+        public function fetchEmployeeDetail($id = 0){
+
+            $recordEmployee = Employee::select('*')
+                        ->where('id',$id)
+                        ->first();
+    
+            $this->searchEmployee = $recordEmployee->id;
+            $this->empDetails = $recordEmployee;
+            $this->showdivEmployee = false;
+        }
+        
 
     // For Getting The Value When Date Changed
     public function inputFirstDate($itemFirstDate){

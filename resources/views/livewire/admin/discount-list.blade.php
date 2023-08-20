@@ -27,23 +27,50 @@
                     </div>
                     <div class="card-body">
 
-                    <div class="d-flex justify-content-between">
+                    <div class="form-row">
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                         <label for="firstDate">@lang('auth.firstDate')</label>
                         <input type="date" class="form-control" id="firstDate"
                         wire:change="inputFirstDate($event.target.value, {{$this->firstDate}})">
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="secondDate">@lang('auth.secondDate')</label>
                         <input type="date" class="form-control" id="secondDate"
                         wire:change="inputSecondDate($event.target.value, {{$this->secondDate}})">
                     </div>
 
-                        </div>
+                    <div class="form-group col-md-4">
+                    <label for="employeeId">@lang('auth.employeeName')</label>
+                        <div class="search-box">
+                          <input wire:model="searchEmployee" wire:keyup="searchResult" type="text" class="form-control" id="employeeId" placeholder="@lang('auth.enterEmpName')">
+                        
+                            <!-- Search result list -->
+                            @if($showdivEmployee)
+                                <ul>
+                                    @if(!empty($recordsEmployee))
+                                        @foreach($recordsEmployee as $recordEmployee)
 
+                                            <li wire:click="fetchEmployeeDetail({{ $recordEmployee->id }})">{{ $recordEmployee->fullName}}</li>
+
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            @endif
+
+                            <div class="clear"></div>
+                            <div>
+                                @if(!empty($empDetails))
+                                    <div>
+                                        Name : {{ $empDetails->fullName }} <br>
+                                    </div>
+                                @endif
+                            </div>
+                          </div>
                     </div>
+</div>
+                        </div>
 
                     <div class="content">
         <div class="container-fluid">
@@ -95,14 +122,14 @@
                                 <th scope="col">@lang('auth.allAbs')</th>
                                 <!-- <th scope="col">No Paynent Or Health Discounts</th> -->
                                 <th scope="col">@lang('auth.maxVacCount')</th>
-                                <th scope="col">@lang('auth.dalyDur')</th>
+                                <th scope="col">@lang('auth.dailyDur')</th>
                                 <th scope="col" class="text-white bg-danger">@lang('auth.dailyDis')</th>
                                 <th scope="col" class="text-white bg-danger">@lang('auth.noPayDis')</th>
                                 <th scope="col" class="text-white bg-danger">@lang('auth.healthDis')</th>
                             </tr>
                             </thead>
                             <tbody>
-                            
+                            @if(!$this->searchEmployee)
                         @foreach ($employeesVacations as $employeesVacation)
                         
 {{-- 
@@ -184,6 +211,81 @@
 @endif
 
 @endforeach
+@endif
+
+
+@if($this->searchEmployee)
+                        @foreach ($employeesVacationsForUsers as $employeesVacationsForUser)
+                        @if($employeesVacationsForUser->type_id == 1 || $employeesVacationsForUser->type_id != 1)
+                        
+                        @if($employeesVacationsForUser->vacation_id == 1 && $employeesVacationsForUser->type_id == 1 && is_null($employeesVacationsForUser->discount))
+                        {{ $this->decrement_vacation_count($employeesVacationsForUser->employees->vacationCount, $this->get_duration_count($employeesVacationsForUser->employee_id), $employeesVacationsForUser->employee_id) }}
+                             @endif
+                           
+                             <tr>
+                           <b style=" display: none;">  {{ $this->get_employee_id($employeesVacationsForUser->employee_id)}} </b>
+                                 <td>{{ $employeesVacationsForUser->employees->fullName }}</td>
+
+                                 <td> 
+                                 <button wire:click.prevent="show_employee_absences({{$employeesVacationsForUser->employee_id}})" class="btn btn-success mr-2">
+                                     <i class="fas fa-info-circle mr-2"></i>@lang('auth.viewAbs')
+                                 </button>
+                                 </td>
+
+                                 <td>{{ $this->get_max_vacation_count($employeesVacationsForUser->employee_id) }}</td>
+
+                                 <td>{{ $this->get_duration_count($employeesVacationsForUser->employee_id) }}</td>
+
+                                
+                                 <td class="text-white bg-danger text-left">
+                                 @if($employeesVacationsForUser->type_id == 1)
+                                    
+                                    <!-- <td class="text-white bg-danger text-left"> -->
+                                    {{ $employeesVacationsForUser->discount }}
+
+                                    @else
+                                    --
+                                    <!-- </td> -->
+                                    @endif
+
+                                    
+                                    </td>
+
+                                   
+
+
+                                    <td class="text-white bg-danger text-left">
+                                        @if($this->get_employee_noPayment_health($this->employeeId) == 3)
+                                     
+                                        @lang('auth.withNoPayDis')
+                                        
+                                        @else
+                                        --
+                                        @endif
+                                    </td>
+                                  
+
+                                    
+                                    <td class="text-white bg-danger text-left">
+
+                                        @if($this->get_employee_noPayment_health($this->employeeId) == 4)
+                                        
+                                        @lang('auth.withHealthDis')
+                                        
+                                        @else
+                                        --
+                                        @endif
+                                    </td>
+                                    
+                                 
+                             </tr>
+                           
+@endif
+
+@endforeach
+@endif
+
+
 
                    {{--      @if($employeesVacation->type_id == 3)
                          @if(is_null($employeesVacation->discount))

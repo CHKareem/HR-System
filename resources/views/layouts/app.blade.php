@@ -455,6 +455,9 @@ width:100%!important;
 
     // Employees
 
+    window.addEventListener('show_emp_vacation_model', event => {
+        $('#emp_vacation-form').modal('show');
+    })
     window.addEventListener('show_success_message', event => {
         toastr.success(event.detail.message, 'Success!');
     })

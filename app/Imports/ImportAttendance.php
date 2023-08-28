@@ -68,6 +68,7 @@ class ImportAttendance implements ToModel, WithStartRow
 
     public function model(array $column)
     {
+        // dd($column[1], Carbon::parse($column[1]), Carbon::parse($column[1])->format('Y-m-d'));
 
         $CheckIn = '09:00';
         $CheckOut = '15:30';
@@ -92,20 +93,19 @@ class ImportAttendance implements ToModel, WithStartRow
 if($column[2] == null){
 
     $employeeIsActive = DB::table('employees')->where('id', $column[0])->first();
-
     if($employeeIsActive->isActive != 0){
        if((in_array(Carbon::parse($column[1])->format('l'),$weekendDate) && !in_array(Carbon::parse($column[1])->format('Y-m-d'),$holidayDate)) || (!in_array(Carbon::parse($column[1])->format('l'),$weekendDate) && !in_array(Carbon::parse($column[1])->format('Y-m-d'),$holidayDate))){
-
+// dd((in_array(Carbon::parse($column[1])->format('l'),$weekendDate) && !in_array(Carbon::parse($column[1])->format('Y-m-d'),$holidayDate)) || (!in_array(Carbon::parse($column[1])->format('l'),$weekendDate) && !in_array(Carbon::parse($column[1])->format('Y-m-d'),$holidayDate)), EmployeesVacation::whereDate('vacationDate', '=', $this->get_weekend_days_with_vacation($column[0], Carbon::parse($column[1])->format('Y-m-d')))->first(), $column[1]);
                         // $vacationDates = EmployeesVacation::where('employee_id', $column[0])->whereDate('vacationDate', '=', Carbon::parse($column[1])->format('Y-m-d'))->first();
         
                         $vacationDates = EmployeesVacation::whereDate('vacationDate', '=', $this->get_weekend_days_with_vacation($column[0], Carbon::parse($column[1])->format('Y-m-d')))->first();
-
+// dd(EmployeesVacation::whereDate('vacationDate', '=', $this->get_weekend_days_with_vacation($column[0], Carbon::parse($column[1])->format('Y-m-d')))->first(), $vacationDates == null);
             if($vacationDates == null && !in_array(Carbon::parse($column[1])->format('l'),$weekendDate)){
                
                     DB::table('employees_vacations')->insert([
         'employee_id' => $column[0],
         'vacation_id' => 1,
-        'vacationDate' => Carbon::parse($column[1]),
+        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
         'type_id' => 1,
         'duration' => 1,
         'reason' => 'No Attendance Log For This Day',
@@ -119,7 +119,7 @@ if($column[2] == null){
 if(!in_array(Carbon::parse($column[1])->format('l'),$weekendDate) && !in_array(Carbon::parse($column[1])->format('Y-m-d'),$holidayDate)){
 Attendee::create([
     'employee_id' => $column[0],
-    'logDate' => Carbon::parse($column[1]),
+    'logDate' => Carbon::parse($column[1])->format('Y-m-d'),
     'logTime' => null,
     'logIn' => null,
     'logOut' => null,
@@ -148,7 +148,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'No Login or Logout Time',
@@ -158,7 +158,7 @@ if( $column[2] != null ){
                     ]);
                     return new Attendee([
                         'employee_id' => $column[0],
-                        'logDate' => Carbon::parse($column[1]),
+                        'logDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'logTime' => $column[2],
                         'logIn' => $login,
                         'logOut' => $logout,
@@ -186,7 +186,7 @@ if( $column[2] != null ){
 
                 if($login >= '09:05' && $login <= '09:29'){
                     // dd($this->get_hourly_late_execuses($column[0], $column[1]) != Carbon::parse($column[1])->format('Y-m-d'));
-                    if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])) != Carbon::parse($column[1])->format('Y-m-d')){
+                    if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) != Carbon::parse($column[1])->format('Y-m-d')){
                         $userId = Null;
                     $loginLate = Carbon::parse($login)->diff(Carbon::parse($CheckIn));
                     $loginLateMin = $loginLate->i;
@@ -198,7 +198,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'more than 2 hours late',
@@ -215,7 +215,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 2,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'type_id' => 2,
                         'duration' => $loginLate,
                         'reason' => ' Hourly Late ',
@@ -226,7 +226,7 @@ if( $column[2] != null ){
                   }
                 }
 
-                if(Carbon::parse($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1]))) == Carbon::parse($column[1])->format('Y-m-d')){
+                if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) == Carbon::parse($column[1])->format('Y-m-d')){
                     $userId = Null;
                     $loginLate = Carbon::parse($login)->diff(Carbon::parse($CheckIn));
                     $loginLateMin = $loginLate->i;
@@ -247,7 +247,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 2 hours late',
@@ -264,7 +264,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 2,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Late Vacation',
@@ -280,7 +280,7 @@ if( $column[2] != null ){
 
                 if($logout < '15:25' && $login < '12:05'){
                     // dd($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])), $column[0], Carbon::parse($column[1])->format('Y-m-d'), $this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])) == Carbon::parse($column[1])->format('Y-m-d'));
-                        if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])) != Carbon::parse($column[1])->format('Y-m-d')){
+                        if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) != Carbon::parse($column[1])->format('Y-m-d')){
                             $userId = Null;
                     $logoutLate = Carbon::parse($logout)->diff(Carbon::parse($CheckOut));
                     $logoutHour = $logoutLate->h;
@@ -293,7 +293,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'more than 7 hours late',
@@ -310,7 +310,7 @@ if( $column[2] != null ){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 2,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'type_id' => 1,
                         'duration' => $logoutLate,
                         'reason' => ' Hourly Vacation ',
@@ -321,13 +321,13 @@ if( $column[2] != null ){
                   }
                 }
 
-                if(Carbon::parse($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1]))) == Carbon::parse($column[1])->format('Y-m-d')){
+                if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) == Carbon::parse($column[1])->format('Y-m-d')){
                     $userId = Null;
                     $loginLate = Carbon::parse($login)->diff(Carbon::parse($CheckIn));
                     $loginHour = $loginLate->h;
                     $loginMin = $loginLate->i;
                     $loginLate = $loginHour . ":" . $loginMin;
-                    $userId = DB::table('employees_vacations')->where('employee_id', $column[0])->whereDate('vacationDate', '=', Carbon::parse($column[1]))->first();
+                    $userId = DB::table('employees_vacations')->where('employee_id', $column[0])->whereDate('vacationDate', '=', Carbon::parse($column[1])->format('Y-m-d'))->first();
                     if($userId->duration != $loginLate){
                         $moreTimeTook = Carbon::parse($loginLate)->diff(Carbon::parse($userId->duration)->format('h:i:s'));
                         $moreTimeTookHour = $moreTimeTook->h;
@@ -340,7 +340,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 7 hours late',
@@ -357,7 +357,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Hourly Vacation',
@@ -383,8 +383,8 @@ if( $column[2] != null ){
               }
 
                 if($login > '09:29' && $login < '12:05'){
-                    // dd(Carbon::parse($this->get_hourly_late_execuses($column[0], $column[1]))->format('Y/m/d'), $column[0], $column[1], Carbon::parse($this->get_hourly_late_execuses($column[0], $column[1]))->format('Y/m/d') != $column[1]);
-                        if(Carbon::parse($this->get_hourly_late_execuses($column[0], $column[1]))->format('Y/m/d') != $column[1]){
+                    // dd($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')), $column[0], Carbon::parse($column[1])->format('Y-m-d'), $this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) == Carbon::parse($column[1])->format('Y-m-d'));
+                        if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) != Carbon::parse($column[1])->format('Y-m-d')){
                             // dd('Not');
                             $userId = Null;
                         $loginLate = Carbon::parse($login)->diff(Carbon::parse($CheckIn));
@@ -416,7 +416,7 @@ if( $column[2] != null ){
                         DB::table('employees_vacations')->insert([
                             'employee_id' => $column[0],
                             'vacation_id' => 2,
-                            'vacationDate' => Carbon::parse($column[1]),
+                            'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                             'type_id' => 1,
                             'duration' => $loginLate,
                             'reason' => ' Hourly Vacation',
@@ -426,14 +426,14 @@ if( $column[2] != null ){
                         ]);
                     }
                 }
-                if(Carbon::parse($this->get_hourly_late_execuses($column[0], $column[1]))->format('Y/m/d') == $column[1]){
+                if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) == Carbon::parse($column[1])->format('Y-m-d')){
                     // dd('yes');
                     $userId = Null;
                      $loginLate = Carbon::parse($login)->diff(Carbon::parse($CheckIn));
                     $loginHour = $loginLate->h;
                     $loginMin = $loginLate->i;
                     $loginLate = $loginHour . ":" . $loginMin;
-                    $userId = DB::table('employees_vacations')->where('employee_id', $column[0])->whereDate('vacationDate', '=', Carbon::parse($column[1]))->first();
+                    $userId = DB::table('employees_vacations')->where('employee_id', $column[0])->whereDate('vacationDate', '=', Carbon::parse($column[1])->format('Y-m-d'))->first();
                     if($userId->duration != $loginLate){
                         $moreTimeTook = Carbon::parse($loginLate)->diff(Carbon::parse($userId->duration)->format('h:i:s'));
                         $moreTimeTookHour = $moreTimeTook->h;
@@ -446,7 +446,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 7 hours late',
@@ -463,7 +463,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Hourly Vacation',
@@ -478,7 +478,7 @@ if( $column[2] != null ){
 
                 if(($login > '12:04' && $logout < '15:25') || ($login > '12:04' && $logout >= '15:25')){
                     // dd($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])), $column[0], Carbon::parse($column[1])->format('Y-m-d'), $this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])) == Carbon::parse($column[1])->format('Y-m-d'), 'svsdfbfdbfdb');
-                    if(Carbon::parse($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1]))) == Carbon::parse($column[1])->format('Y-m-d')){
+                    if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) == Carbon::parse($column[1])->format('Y-m-d')){
                     $loginLate = Carbon::parse($login)->diff(Carbon::parse($CheckIn));
                     $loginHour = $loginLate->h;
                     $loginMin = $loginLate->i;
@@ -496,7 +496,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 1,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => 1,
                                 'reason' => 'more than 7 hours late',
@@ -513,7 +513,7 @@ if( $column[2] != null ){
                             DB::table('employees_vacations')->insert([
                                 'employee_id' => $column[0],
                                 'vacation_id' => 2,
-                                'vacationDate' => Carbon::parse($column[1]),
+                                'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                                 'type_id' => 1,
                                 'duration' => $moreTimeTook,
                                 'reason' => ' Extended Hourly Vacation',
@@ -524,11 +524,11 @@ if( $column[2] != null ){
                         }
                     }
                 }
-                    if(Carbon::parse($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1]))) != Carbon::parse($column[1])->format('Y-m-d')){
+                    if($this->get_hourly_late_execuses($column[0], Carbon::parse($column[1])->format('Y-m-d')) != Carbon::parse($column[1])->format('Y-m-d')){
                     DB::table('employees_vacations')->insert([
                         'employee_id' => $column[0],
                         'vacation_id' => 1,
-                        'vacationDate' => Carbon::parse($column[1]),
+                        'vacationDate' => Carbon::parse($column[1])->format('Y-m-d'),
                         'type_id' => 1,
                         'duration' => 1,
                         'reason' => 'More than 3 hours late',
@@ -544,7 +544,7 @@ if( $column[2] != null ){
 
             return new Attendee([
                 'employee_id' => $column[0],
-                'logDate' => Carbon::parse($column[1]),
+                'logDate' => Carbon::parse($column[1])->format('Y-m-d'),
                 'logTime' => $column[2],
                 'logIn' => $login,
                 'logOut' => $logout,
